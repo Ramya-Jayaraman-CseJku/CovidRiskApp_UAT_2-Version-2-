@@ -28,7 +28,7 @@ export default function ModelParamSelection({navigation}) {
     TRANSITIONS[2],
   );
   //behavior
-  const [maskCateogoryPpl, setMaskCategoryPpl] = useState('None');
+  const [maskCateogoryPpl, setMaskCategoryPpl] = useState('MaskforPeople');
   const [maskEfficiencyI, setMaskEfficiencyI] = useState(0);
   const [maskEfficiencyN, setMaskEfficiencyN] = useState(0);
   const [maskTypeI, setMaskTypeI] = useState('None');
@@ -84,6 +84,7 @@ export default function ModelParamSelection({navigation}) {
     setSpeechDurationinTime,
     setSpeechVolumeText,
   };
+  console.log('model', {maskCateogoryPpl});
   /* console.log({selectedEventType});
   console.log({maskCateogoryPpl});
   console.log({roomSize});

@@ -103,9 +103,12 @@ function InfectedPersonProperties({infectedpplprops}) {
         }}
         titleStyle={{paddingLeft: 5, marginLeft: 5, alignContent: 'center'}}>
         <Card containerStyle={styles.cardContainer}>
-          <Text style={styles.textstyle}>
-            These properties applies only to infected person in room
-          </Text>
+          <View style={{alignContent: 'center', alignItems: 'center'}}>
+            <Text style={styles.textstyle}>
+              These properties apply only to the infected person in the room.
+            </Text>
+          </View>
+
           <View style={styles.cardrow}>
             <View style={styles.spaceImagesthree}>
               <TouchableOpacity
@@ -119,9 +122,8 @@ function InfectedPersonProperties({infectedpplprops}) {
                   source={require('./images/speech-bubble.png')}
                   style={styles.imgDimensions}
                 />
-                <Text style={styles.textStyle}>
-                  {'\n'}Speech{'\n'}Time
-                </Text>
+                {/* <Text style={styles.textStyle}>{'\n'}Speech Time</Text>
+                 */}
               </TouchableOpacity>
             </View>
             <View style={styles.spaceImagesthree}>
@@ -136,11 +138,14 @@ function InfectedPersonProperties({infectedpplprops}) {
                   source={require('./images/speech.png')}
                   style={styles.imgDimensions}
                 />
-                <Text style={styles.textStyle}>
-                  {'\n'}Speech{'\n'}Volume
-                </Text>
+                {/* <Text style={styles.textStyle}>{'\n'}Speech Volume</Text>
+                 */}
               </TouchableOpacity>
             </View>
+          </View>
+          <View style={styles.cardrow1}>
+            <Text style={styles.textStyle1}>Speech Time</Text>
+            <Text style={styles.textStyle2}>Speech Volume</Text>
           </View>
           {showSpeechTime ? (
             <View style={styles.cardrow}>
@@ -273,14 +278,22 @@ const styles = StyleSheet.create({
   },
   cardrow: {
     flexDirection: 'row',
-    paddingTop: 10,
-    paddingBottom: 20,
+    //paddingTop: 10,
+    // paddingBottom: 20,
+
+    alignContent: 'center',
+    alignItems: 'center',
+    // paddingBottom: 15,
   },
   spaceImagesthree: {
     flexDirection: 'row',
-    paddingTop: 20,
-    paddingLeft: 30,
-    padding: 10,
+    //paddingTop: 20,
+    paddingTop: 5,
+    // paddingLeft: 20,
+    // marginBottom: 10,
+    alignContent: 'center',
+    alignItems: 'center',
+    paddingLeft: 60,
   },
   red: {
     backgroundColor: '#58D68D',
@@ -302,14 +315,34 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
   },
-  textStyle: {color: 'black'},
+  cardrow1: {
+    flexDirection: 'row',
+    paddingTop: 3,
+  },
+  textStyle1: {
+    color: 'black',
+    paddingLeft: 55,
+    fontSize: 14,
+  },
+  textStyle2: {
+    color: 'black',
+    paddingLeft: 38,
+    fontSize: 14,
+  },
+  textStyle: {color: 'black', fontSize: 14},
   spaceImagesinSubset: {
-    paddingTop: 34,
-    paddingLeft: 5,
+    paddingTop: 5,
+    paddingLeft: 9,
+    // paddingTop: 34,
+    // paddingLeft: 5,
     alignContent: 'center',
     alignItems: 'center',
-    paddingBottom: 20,
+    paddingBottom: 25,
+    marginBottom: 9,
+    //paddingBottom: 15,
+    // padding: 10,
   },
+
   imgDimensionsinSubset: {
     width: 45,
     height: 45,
@@ -320,6 +353,8 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
     paddingLeft: 3,
     padding: 5,
+    alignContent: 'center',
+    alignItems: 'center',
   },
 });
 export default InfectedPersonProperties;

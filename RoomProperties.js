@@ -26,7 +26,7 @@ function RoomProperties({roomprops}) {
       roomprops.setNoOfPeople(24);
       roomprops.setMaskTypeI('No Mask');
       roomprops.setMaskTypeN('No Mask');
-      roomprops.setMaskCategoryPpl('None');
+      roomprops.setMaskCategoryPpl('Mask For People');
       roomprops.setVentilationType('Window Closed');
       roomprops.setSpeechVolumeText('Normal');
       roomprops.setSpeechDurationinTime('10%');
@@ -43,7 +43,7 @@ function RoomProperties({roomprops}) {
       roomprops.setNoOfPeople(4);
       roomprops.setMaskTypeI('No Mask');
       roomprops.setMaskTypeN('No Mask');
-      roomprops.setMaskCategoryPpl('None');
+      roomprops.setMaskCategoryPpl('Mask For People');
       roomprops.setVentilationType('Window Closed');
       roomprops.setSpeechVolumeText('Normal');
       roomprops.setSpeechDurationinTime('10%');
@@ -60,7 +60,7 @@ function RoomProperties({roomprops}) {
       roomprops.setNoOfPeople(100);
       roomprops.setMaskTypeI('No Mask');
       roomprops.setMaskTypeN('No Mask');
-      roomprops.setMaskCategoryPpl('None');
+      roomprops.setMaskCategoryPpl('Mask For People');
       roomprops.setVentilationType('Window Closed');
       roomprops.setSpeechVolumeText('Normal');
       roomprops.setSpeechDurationinTime('25%');
@@ -77,7 +77,7 @@ function RoomProperties({roomprops}) {
       roomprops.setNoOfPeople(25);
       roomprops.setMaskTypeI('No Mask');
       roomprops.setMaskTypeN('No Mask');
-      roomprops.setMaskCategoryPpl('None');
+      roomprops.setMaskCategoryPpl('Mask For People');
       roomprops.setVentilationType('Window Closed');
       roomprops.setSpeechVolumeText('Yelling');
       roomprops.setSpeechDurationinTime('60%');
@@ -94,7 +94,7 @@ function RoomProperties({roomprops}) {
       roomprops.setNoOfPeople(10);
       roomprops.setMaskTypeI('No Mask');
       roomprops.setMaskTypeN('No Mask');
-      roomprops.setMaskCategoryPpl('None');
+      roomprops.setMaskCategoryPpl('Mask For People');
       roomprops.setVentilationType('Ventilation System');
       roomprops.setSpeechVolumeText('Loud');
       roomprops.setSpeechDurationinTime('5%');
@@ -119,10 +119,10 @@ function RoomProperties({roomprops}) {
       SetErrorRoomSize('Enter a Number');
     } else if (parsedRoomSize < 10) {
       roomprops.setRoomSize(Math.round(parsedRoomSize));
-      SetErrorRoomSize('Minimum value is 10');
-    } else if (parsedRoomSize > 560) {
+      SetErrorRoomSize('Minimum size is 10 sq.m');
+    } else if (parsedRoomSize > 200) {
       roomprops.setRoomSize(Math.round(parsedRoomSize));
-      SetErrorRoomSize('Maximum value is 560');
+      SetErrorRoomSize('Maximum size is 200 sq.m');
     } else {
       roomprops.setRoomSize(Math.round(parseFloat(parsedRoomSize)));
       SetErrorRoomSize('');
@@ -135,10 +135,10 @@ function RoomProperties({roomprops}) {
       SetErrorDuration('Enter a Number');
     } else if (parsedDuration < 1) {
       roomprops.setDurationofStay(Math.round(parsedDuration));
-      SetErrorDuration('Minimum value is 1 hour');
+      SetErrorDuration('Minimum duration is 1 hour');
     } else if (parsedDuration > 24) {
       roomprops.setDurationofStay(Math.round(parsedDuration));
-      SetErrorDuration('Maximum value is 24 hours');
+      SetErrorDuration('Maximum duration is 24 hours');
     } else {
       roomprops.setDurationofStay(Math.round(parseFloat(parsedDuration)));
       SetErrorDuration('');
@@ -153,9 +153,9 @@ function RoomProperties({roomprops}) {
     } else if (parsedpplcount < 2) {
       roomprops.setNoOfPeople(Math.round(parsedpplcount));
       SetErrorPplCount('Minimum of 2 people in room');
-    } else if (parsedpplcount > 224) {
+    } else if (parsedpplcount > 100) {
       roomprops.setNoOfPeople(Math.round(parsedpplcount));
-      SetErrorPplCount('Maximum people in room is 224');
+      SetErrorPplCount('Maximum of 100 people in room');
     } else {
       roomprops.setNoOfPeople(Math.round(parsedpplcount));
       SetErrorPplCount('');
@@ -234,7 +234,8 @@ function RoomProperties({roomprops}) {
         titleStyle={{paddingLeft: 5, marginLeft: 5, alignContent: 'center'}}>
         <Card containerStyle={styles.cardContainer}>
           <List.Accordion
-            title="Event Type"
+            title={roomprops.eventType}
+            titleStyle={{color: '#9239FE'}}
             expanded={expandEvent}
             onPress={handleEventType}>
             {eventType.map(eventtype => (
@@ -247,45 +248,63 @@ function RoomProperties({roomprops}) {
               />
             ))}
           </List.Accordion>
-          <Text>{'\n'}</Text>
-          <TextInput
-            label="Room Size in sq.m"
-            value={roomprops.roomSize.toString()}
-            onChangeText={roomSize => onCheckLimitRoomSize(roomSize)}
-            mode="outlined"
-            placeholder="Enter Room Size"
-            keyboardType={'numeric'}
-            style={styles.textInputLabel}
-          />
-          <HelperText type="error" visible={true} style={styles.textInputLabel}>
-            {errorRoomSize}
-          </HelperText>
-          <TextInput
-            label="Duration of Stay in hr"
-            value={roomprops.durationofStay.toString()}
-            onChangeText={durationofStay =>
-              onCheckLimitDurationStay(durationofStay)
-            }
-            mode="outlined"
-            placeholder="Enter Duration of Stay"
-            keyboardType={'numeric'}
-            style={styles.textInputLabel}
-          />
-          <HelperText type="error" visible={true} style={styles.textInputLabel}>
-            {errorDuration}
-          </HelperText>
-          <TextInput
-            label="Number of people"
-            value={roomprops.noOfPeople.toString()}
-            onChangeText={noOfPeople => onCheckLimitPeopleCount(noOfPeople)}
-            mode="outlined"
-            placeholder="Enter Number of People"
-            keyboardType={'numeric'}
-            style={styles.textInputLabel}
-          />
-          <HelperText type="error" visible={true} style={styles.textInputLabel}>
-            {errorPplCount}
-          </HelperText>
+
+          <View style={{paddingTop: 15}}>
+            <TextInput
+              label={<Text style={{fontSize: 18}}>Room Size in sq.m</Text>}
+              value={roomprops.roomSize.toString()}
+              onChangeText={roomSize => onCheckLimitRoomSize(roomSize)}
+              mode="outlined"
+              placeholder="Enter Room Size"
+              keyboardType={'numeric'}
+              style={styles.textInputLabel}
+              theme={{
+                colors: {
+                  text: '#9239FE',
+                },
+              }}
+            />
+            <HelperText type="error" visible={true} style={styles.helpText}>
+              {errorRoomSize}
+            </HelperText>
+            <TextInput
+              selectionColor="#9239FE"
+              style={styles.textInputLabel}
+              label={<Text style={{fontSize: 18}}>Duration of Stay in hr</Text>}
+              value={roomprops.durationofStay.toString()}
+              onChangeText={durationofStay =>
+                onCheckLimitDurationStay(durationofStay)
+              }
+              mode="outlined"
+              placeholder="Enter Duration of Stay"
+              keyboardType={'numeric'}
+              theme={{
+                colors: {
+                  text: '#9239FE',
+                },
+              }}
+            />
+            <HelperText type="error" visible={true} style={styles.helpText}>
+              {errorDuration}
+            </HelperText>
+            <TextInput
+              style={styles.textInputLabel}
+              label={<Text style={{fontSize: 18}}>Number of people</Text>}
+              value={roomprops.noOfPeople.toString()}
+              onChangeText={noOfPeople => onCheckLimitPeopleCount(noOfPeople)}
+              mode="outlined"
+              placeholder="Enter Number of People"
+              keyboardType={'numeric'}
+              theme={{
+                colors: {
+                  text: '#9239FE',
+                },
+              }}
+            />
+            <HelperText type="error" visible={true} style={styles.helpText}>
+              {errorPplCount}
+            </HelperText>
+          </View>
           <View style={styles.cardrow}>
             <View style={styles.spaceImagesthree}>
               <TouchableOpacity
@@ -297,7 +316,7 @@ function RoomProperties({roomprops}) {
                   source={require('./images/windowicon.png')}
                   style={styles.imgDimensions}
                 />
-                <Text style={styles.textStyle}>{'\n'}window</Text>
+                {/* <Text style={styles.textStyle}>{'\n'}window</Text> */}
               </TouchableOpacity>
             </View>
             <View style={styles.spaceImagesthree}>
@@ -312,11 +331,15 @@ function RoomProperties({roomprops}) {
                   source={require('./images/ceiling_height_icon.png')}
                   style={styles.imgDimensions}
                 />
-                <Text style={styles.textStyle}>
+                {/* <Text style={styles.textStyle}>
                   {'\n'}Ceiling{'\n'}Height
-                </Text>
+                </Text> */}
               </TouchableOpacity>
             </View>
+          </View>
+          <View style={styles.cardrow1}>
+            <Text style={styles.textStyle1}>Window</Text>
+            <Text style={styles.textStyle2}>Ceiling Height</Text>
           </View>
           {showWindow ? (
             <View style={styles.cardrow}>
@@ -444,13 +467,17 @@ const styles = StyleSheet.create({
   cardrow: {
     flexDirection: 'row',
 
-    paddingBottom: 20,
+    //paddingTop: 5,
+    // paddingBottom: 20,
+    // paddingBottom: 15,
   },
   spaceImagesthree: {
     flexDirection: 'row',
-    paddingTop: 20,
-    paddingLeft: 30,
-    padding: 10,
+    //paddingTop: 10,
+
+    paddingLeft: 60,
+    // padding: 10,
+    // marginBottom: 10,
   },
   red: {
     backgroundColor: '#58D68D',
@@ -472,12 +499,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
   },
-  textStyle: {color: 'black'},
+  textStyle: {color: 'black', paddingLeft: 4, fontSize: 14},
+
+  helpText: {
+    color: '#ff0000',
+  },
+  cardrow1: {
+    flexDirection: 'row',
+    // paddingTop: 3,
+  },
+  textStyle1: {
+    color: 'black',
+    paddingLeft: 69,
+    fontSize: 14,
+  },
+  textStyle2: {
+    color: 'black',
+    paddingLeft: 64,
+    fontSize: 14,
+  },
   spaceImagesinSubset: {
-    paddingTop: 34,
-    paddingLeft: 5,
+    // paddingTop: 34,
+    paddingTop: 5,
+    paddingLeft: 9,
     alignContent: 'center',
     alignItems: 'center',
+    marginBottom: 9,
   },
   imgDimensionsinSubset: {
     width: 45,

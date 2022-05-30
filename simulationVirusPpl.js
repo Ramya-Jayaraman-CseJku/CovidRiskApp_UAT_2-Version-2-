@@ -52,7 +52,9 @@ const styles = StyleSheet.create({
   cardContainerStyle: {
     backgroundColor: '#FFFFFF',
     borderRadius: 15,
-    width: 360,
+    //width: 360,
+    width: 350,
+    marginLeft: 20,
     height: 270,
     overflow: 'hidden',
   },

@@ -25,7 +25,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 const STYLES = ['default', 'dark-content', 'light-content'];
 const TRANSITIONS = ['fade', 'slide', 'none'];
 
-export default function getWarningLevelDataAPI() {
+export default function getWarningLevelDataAPI({navigation}) {
   const [hidden, setHidden] = useState(false);
   const [statusBarStyle, setStatusBarStyle] = useState(STYLES[2]);
   const [statusBarTransition, setStatusBarTransition] = useState(
@@ -36,14 +36,34 @@ export default function getWarningLevelDataAPI() {
   const [districtName, setDistrictName] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errorDate, setError] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(new Date('2022-02-17'));
+  const [selectedDate, setSelectedDate] = useState(new Date('2022-05-19'));
 
   const [selectedWarnLevelDate, setSelectedWarnLevelDate] =
-    useState('2022-02-17');
+    useState('2022-05-19');
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity
+          onPress={() =>
+            Linking.openURL(
+              'https://www.data.gv.at/katalog/dataset/52abfc2b-031c-4875-b838-653abbfccf4e',
+            )
+          }>
+          <Icon
+            name="information"
+            type="material-community"
+            color="#ffffff"
+            style={{paddingTop: 2, paddingRight: 10}}
+          />
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
   const getWarnLevelDates = async () => {
     try {
       const response = await fetch(
-        `https://covid19infoapi.appspot.com/api/warnLevelRegion/?date=${selectedWarnLevelDate}`,
+        `https://covid19infoapi-348917.lm.r.appspot.com/api/warnLevelRegion/?date=${selectedWarnLevelDate}`,
       );
       const json = await response.json();
       setDistrictName(json);
@@ -77,6 +97,7 @@ export default function getWarningLevelDataAPI() {
     getMonth,
     dayNumber,
     dayString,
+    getYear,
   }) => (
     <TouchableOpacity
       onPress={onPress}
@@ -87,8 +108,11 @@ export default function getWarningLevelDataAPI() {
       <Text style={[styles.dateOutput, backgroundColor && textColor]}>
         {dayNumber}
       </Text>
-      <Text style={[styles.dayStyle, backgroundColor && textColor]}>
+      {/*  <Text style={[styles.dayStyle, backgroundColor && textColor]}>
         {isToday(item) ? 'today' : dayString}
+      </Text> */}
+      <Text style={[styles.dayStyle, backgroundColor && textColor]}>
+        {getYear}
       </Text>
     </TouchableOpacity>
   );
@@ -105,6 +129,9 @@ export default function getWarningLevelDataAPI() {
 
   function getMonthName(date) {
     return date.toString().split(' ')[1];
+  }
+  function getAcademicYear(date) {
+    return date.toString().split(' ')[2];
   }
   function isSameDay(date1, date2) {
     if (
@@ -151,6 +178,7 @@ export default function getWarningLevelDataAPI() {
     const dayNumber = item.getDate();
     const dayString = getDayString(item);
     const getMonth = getMonthName(item);
+    const getYear = item.getFullYear();
     const isActive = isSameDay(new Date(selectedDate), item);
     const backgroundColor = isActive ? 'white' : '#0346a6';
     const color = isActive ? 'green' : 'white';
@@ -164,6 +192,7 @@ export default function getWarningLevelDataAPI() {
         getMonth={getMonth}
         dayNumber={dayNumber}
         dayString={dayString}
+        getYear={getYear}
       />
     );
   };
@@ -257,19 +286,6 @@ export default function getWarningLevelDataAPI() {
                 <Card.Title style={styles.cardTitle}>
                   COVID-19 Risk Level Indicators
                 </Card.Title>
-                <TouchableOpacity
-                  onPress={() =>
-                    Linking.openURL(
-                      'https://www.data.gv.at/katalog/dataset/52abfc2b-031c-4875-b838-653abbfccf4e',
-                    )
-                  }>
-                  <Icon
-                    name="information"
-                    type="material-community"
-                    color="#d78700"
-                    style={{marginBottom: 10, paddingLeft: 20}}
-                  />
-                </TouchableOpacity>
               </View>
             </View>
             {/*  <Card.Title style={styles.cardTitle}>

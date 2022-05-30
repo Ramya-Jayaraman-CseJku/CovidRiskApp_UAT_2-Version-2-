@@ -17,17 +17,13 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import DataOverview from './Screen1Overviewtrial';
 
 import getPositiveCasesCountAPI from './Screen2PositiveCount';
-import getVaccineDistricts from './Screen4VaccineDistricts';
+import getVaccineDistricts from './Screen3VaccineDistricts';
 import getReffectiveValue from './Screen4Reff';
 import getWarningLevelDataAPI from './getCoronaWarningLevel';
 import ModelParamSelection from './modal';
 
 const Stack1 = createStackNavigator();
-const positiveCases = () => {
-  Linking.openURL(
-    'https://www.data.gv.at/katalog/dataset/4b71eb3d-7d55-4967-b80d-91a3f220b60c',
-  );
-};
+
 function DataOverviewStack() {
   return (
     <View style={styles.container}>
@@ -106,7 +102,7 @@ function DataOverviewStack() {
             title: 'Vaccinated Count',
             headerTitleAlign: 'center',
             headerStyle: {
-              backgroundColor: 'green',
+              backgroundColor: '#2CB083',
             },
             headerTintColor: '#ffffff',
             headerTitleStyle: {
@@ -139,7 +135,7 @@ function DataOverviewStack() {
           name="Warning Level"
           component={getWarningLevelDataAPI}
           options={{
-            title: 'Warning Level',
+            title: 'Warning',
             headerTitleAlign: 'center',
             headerStyle: {
               backgroundColor: '#d78700',
@@ -157,7 +153,7 @@ function DataOverviewStack() {
           name="Modal Parameters"
           component={ModelParamSelection}
           options={{
-            title: 'Risk Infection & Simulation',
+            title: 'Model',
             headerTitleAlign: 'center',
             headerStyle: {
               backgroundColor: '#9239FE',

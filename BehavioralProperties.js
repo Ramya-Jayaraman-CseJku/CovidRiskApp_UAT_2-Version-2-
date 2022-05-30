@@ -13,6 +13,7 @@ function BehavioralProperties({todos}) {
   const [showVaccine, setShowVaccine] = useState(false);
   const [showMasks, setShowMasks] = useState(false);
   const [bg, setBg] = useState({colorId: 0});
+  const [onpressed, setonpressed] = useState(false);
   const handleMaskPpl = () => setExpandMaskForPpl(!expandMaskForPpl);
   const MaskEfficiencyPeople = [
     {name: 'Infected', id: 1},
@@ -79,6 +80,7 @@ function BehavioralProperties({todos}) {
       todos.setMaskTypeN(maskType);
     }
   }
+
   return (
     <View>
       <CollapsibleView
@@ -110,10 +112,16 @@ function BehavioralProperties({todos}) {
         titleProps={{paddingLeft: 5, marginLeft: 5}}
         touchableWrapperStyle={{paddingLeft: 5, marginLeft: 5}}
  */
-        titleStyle={{paddingLeft: 5, marginLeft: 5, alignContent: 'center'}}>
+        titleStyle={{
+          paddingLeft: 5,
+          marginLeft: 5,
+          alignContent: 'center',
+          color: '#9239FE',
+        }}>
         <Card containerStyle={styles.cardContainer}>
           <List.Accordion
-            title="Mask For People"
+            title={todos.maskCateogoryPpl}
+            titleStyle={{color: '#9239FE'}}
             expanded={expandMaskForPpl}
             onPress={handleMaskPpl}>
             {MaskEfficiencyPeople.map(maskPpl => (
@@ -122,10 +130,13 @@ function BehavioralProperties({todos}) {
                 title={maskPpl.name}
                 onPress={() => {
                   todos.setMaskCategoryPpl(maskPpl.name);
+
+                  //  setonpressed(true);
                 }}
               />
             ))}
           </List.Accordion>
+
           <View style={{flexDirection: 'row'}}></View>
           <View style={styles.cardrow}>
             <View style={styles.spaceImagesthree}>
@@ -138,7 +149,7 @@ function BehavioralProperties({todos}) {
                   source={require('./images/injection.png')}
                   style={styles.imgDimensions}
                 />
-                <Text style={styles.textStyle}>{'\n'}Vaccine</Text>
+                {/* <Text style={styles.textStyle}>{'\n'}Vaccine</Text> */}
               </TouchableOpacity>
             </View>
             <View style={styles.spaceImagesthree}>
@@ -149,14 +160,17 @@ function BehavioralProperties({todos}) {
                   source={require('./images/ffp2.png')}
                   style={styles.imgDimensions}
                 />
-
-                <Text style={styles.textStyle}>{'\n'}Mask</Text>
+                {/*  <Text style={styles.textStyle}>{'\n'}Mask Type</Text>*/}
               </TouchableOpacity>
             </View>
           </View>
+          <View style={styles.cardrow1}>
+            <Text style={styles.textStyle1}>Vaccine</Text>
+            <Text style={styles.textStyle2}>Mask Type</Text>
+          </View>
           {showVaccine ? (
             <View style={styles.cardrow}>
-              <View style={styles.spaceImagesinSubset}>
+              <View style={styles.spaceImagesinSubset1}>
                 <TouchableOpacity
                   onPress={() => selectedVaccinatin('None', 'vaccine', 1)}
                   style={bg.colorId === 1 ? styles.red : styles.defaultBg}>
@@ -167,7 +181,7 @@ function BehavioralProperties({todos}) {
                 </TouchableOpacity>
                 <Text style={styles.textStyle}>None</Text>
               </View>
-              <View style={styles.spaceImagesinSubset}>
+              <View style={styles.spaceImagesinSubset1}>
                 <TouchableOpacity
                   onPress={() => selectedVaccinatin('Everyone', 'vaccine', 2)}
                   style={bg.colorId === 2 ? styles.red : styles.defaultBg}>
@@ -178,7 +192,7 @@ function BehavioralProperties({todos}) {
                 </TouchableOpacity>
                 <Text style={styles.textStyle}>Everyone</Text>
               </View>
-              <View style={styles.spaceImagesinSubset}>
+              <View style={styles.spaceImagesinSubset1}>
                 <TouchableOpacity
                   onPress={() => selectedVaccinatin('Individual', 'vaccine', 3)}
                   style={bg.colorId === 3 ? styles.red : styles.defaultBg}>
@@ -210,7 +224,7 @@ function BehavioralProperties({todos}) {
                     style={styles.imgDimensionsinSubset}
                   />
                 </TouchableOpacity>
-                <Text style={styles.textStyle}>FFP2 Mask</Text>
+                <Text style={styles.textStyle}>FFP2 </Text>
               </View>
               <View style={styles.spaceImagesinSubset}>
                 <TouchableOpacity
@@ -229,7 +243,7 @@ function BehavioralProperties({todos}) {
                     style={styles.imgDimensionsinSubset}
                   />
                 </TouchableOpacity>
-                <Text style={styles.textStyle}>Surgical Mask</Text>
+                <Text style={styles.textStyle}>Surgical </Text>
               </View>
               <View style={styles.spaceImagesinSubset}>
                 <TouchableOpacity
@@ -248,7 +262,7 @@ function BehavioralProperties({todos}) {
                     style={styles.imgDimensionsinSubset}
                   />
                 </TouchableOpacity>
-                <Text style={styles.textStyle}>Cloth Mask</Text>
+                <Text style={styles.textStyle}>Cloth </Text>
               </View>
               <View style={styles.spaceImagesinSubset}>
                 <TouchableOpacity
@@ -293,14 +307,17 @@ const styles = StyleSheet.create({
   },
   cardrow: {
     flexDirection: 'row',
-    paddingTop: 10,
-    paddingBottom: 20,
+    // paddingTop: 10,
+    // paddingBottom: 20,
+    // paddingBottom: 15,
   },
   spaceImagesthree: {
     flexDirection: 'row',
-    paddingTop: 20,
-    paddingLeft: 30,
-    padding: 10,
+    //paddingTop: 20,
+    // paddingLeft: 30,
+    // padding: 10,
+    paddingLeft: 60,
+    paddingTop: 10,
   },
   red: {
     backgroundColor: '#58D68D',
@@ -322,12 +339,41 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
   },
-  textStyle: {color: 'black'},
+  textStyle: {color: 'black', fontSize: 14},
+  cardrow1: {
+    flexDirection: 'row',
+    paddingTop: 3,
+  },
+  textStyle1: {
+    color: 'black',
+    paddingLeft: 69,
+    fontSize: 14,
+  },
+  textStyle2: {
+    color: 'black',
+    paddingLeft: 73,
+    fontSize: 14,
+  },
   spaceImagesinSubset: {
-    paddingTop: 34,
-    paddingLeft: 5,
+    // paddingTop: 34,
+    // paddingTop: 20,
+    // paddingLeft: 5,
     alignContent: 'center',
     alignItems: 'center',
+    paddingTop: 5,
+    paddingLeft: 9,
+    // paddingLeft: 7,
+  },
+  spaceImagesinSubset1: {
+    // paddingTop: 5,
+    paddingLeft: 25,
+    paddingTop: 7,
+    // paddingLeft: 5,
+    alignContent: 'center',
+    alignItems: 'center',
+    // paddingBottom: 25,
+    //paddingBottom: 15,
+    // padding: 10,
   },
   imgDimensionsinSubset: {
     width: 45,

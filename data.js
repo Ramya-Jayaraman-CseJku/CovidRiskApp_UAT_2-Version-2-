@@ -11,6 +11,14 @@ import Carousel, {Pagination} from 'react-native-snap-carousel';
 /* export const SLIDER_WIDTH = Dimensions.get('window').width - 80;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
  */
+
+/* const horizontalMargin = 50;
+const slideWidth = 280;
+const sliderWidth = Dimensions.get('window').width;
+const itemWidth = slideWidth + horizontalMargin * 2;
+const itemHeight = 200;
+export const SLIDER_WIDTH = Dimensions.get('window').width;
+export const ITEM_WIDTH = slideWidth + horizontalMargin * 2; */
 export const SLIDER_WIDTH = 380;
 export const ITEM_WIDTH = 432;
 
@@ -35,27 +43,8 @@ export default function ModalParameters({todos}) {
   const speechDuration = todos.speechDuration;
   const speechDurationTime = todos.speechDurationinTime;
   const speechVolumeText = todos.speechVolumeText;
-  /*  const enabled =
-    errorRoomSize.length < 1 &&
-    errorDuration.length < 1 &&
-    errorPplCount.length < 1; */
+
   const data = [
-    {
-      title: 'Behavioral Properties',
-      text:
-        'Mask for People -' +
-        maskCategory +
-        '\n' +
-        'Mask Type for Infected People -' +
-        maskTypeI +
-        '\n' +
-        'Mask Type for Normal People -' +
-        maskTypeN +
-        '\n' +
-        'Vaccination -' +
-        vaccine +
-        '\n',
-    },
     {
       title: 'Room Properties',
       text:
@@ -84,6 +73,22 @@ export default function ModalParameters({todos}) {
         'm',
     },
     {
+      title: 'Behavioral Properties',
+      text:
+        /*  'Mask for People -' +
+        maskCategory +
+        '\n' + */
+        'Mask Type for Infected People -' +
+        maskTypeI +
+        '\n' +
+        'Mask Type for Normal People -' +
+        maskTypeN +
+        '\n' +
+        'Vaccination -' +
+        vaccine +
+        '\n',
+    },
+    {
       title: 'Infected Person Properties',
       text:
         'Speech volume -' +
@@ -91,8 +96,6 @@ export default function ModalParameters({todos}) {
         '\n' +
         'Speech Duration -' +
         speechDurationTime,
-      //'\n' +
-      // 'Respiratory volume - 10',
     },
   ];
   const CarouselCardItem = ({item, index}) => {
@@ -117,60 +120,22 @@ export default function ModalParameters({todos}) {
           renderItem={CarouselCardItem}
           sliderWidth={SLIDER_WIDTH}
           itemWidth={ITEM_WIDTH}
-          useScrollView={false}
+          useScrollView={true}
           onSnapToItem={index => setIndex({activeIndex: index})}
         />
 
-        {/*   <View style={styles.buttonStyle1}>
-          <Button
-            disabled={false}
-            title="Start Simulation"
-            color="#2C76F0"
-            onPress={() => {
-              navigation.navigate('Simulation', {
-                selectedeventType: selectedEventType,
-                maskForCategory: maskCateogoryPpl,
-
-                roomSize: roomSize,
-
-                durationOfStay: durationofStay,
-
-                noOfPeople: noOfPeople,
-
-                maskEfficiencyInfected: maskEfficiencyI,
-
-                maskEfficiencyNormal: maskEfficiencyN,
-                vaccine: vaccination,
-
-                ventilation: ventilation,
-
-                ceilingHeight: ceilingHeight,
-
-                speechDuration: speechDuration,
-
-                speechVolume: speechVolume,
-              });
-            }}
-          />
-        </View> */}
-        {/*  <View style={styles.CarousalPagination}>
+        <View style={styles.CarousalPagination}>
           <Pagination
+            containerStyle={{paddingVertical: 0}}
             dotsLength={data.length}
             activeDotIndex={index.activeIndex}
             carouselRef={isCarousel}
-            dotStyle={{
-              marginLeft: 15,
-              width: 10,
-              height: 10,
-              borderRadius: 5,
-              marginHorizontal: 0,
-              backgroundColor: 'black',
-            }}
+            dotStyle={styles.carousalPaginationDotStyle}
             inactiveDotOpacity={0.4}
             inactiveDotScale={0.6}
             tappableDots={true}
           />
-        </View> */}
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -178,16 +143,17 @@ export default function ModalParameters({todos}) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
-
-    width: 360,
-    height: 200,
+    //width: 360,
+    width: 350,
+    height: 215,
     marginTop: 10,
     borderRadius: 15,
     //paddingTop: 10,
     marginBottom: 10,
-    //paddingBottom: 30,
-    marginLeft: 18,
-    marginRight: 18,
+    paddingBottom: 30,
+    //marginLeft: 10,
+    marginLeft: 20,
+    marginRight: 10,
     shadowColor: 'white',
     shadowOffset: {
       width: 1,
@@ -223,11 +189,20 @@ const styles = StyleSheet.create({
     // paddingTop: 15,
   },
   CarousalPagination: {
+    paddingVertical: 0,
     //marginTop: 10,
     // marginTop: 0,
   },
   buttonStyle1: {
     flexDirection: 'row',
     justifyContent: 'center',
+  },
+  carousalPaginationDotStyle: {
+    marginLeft: 15,
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    marginHorizontal: 0,
+    backgroundColor: 'black',
   },
 });

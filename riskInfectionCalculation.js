@@ -94,12 +94,12 @@ export default function RiskInfoandSimulation({todos}) {
         <Collapsible collapsed={showRiskInfo}>
           <Text style={styles.RiskInfText}>
             Ri-
-            <Text style={{color: 'black'}}>
-              individual infection risk if one person is infectious {'\n'}
+            <Text style={{color: 'black', fontSize: 17, fontWeight: 'normal'}}>
+              Individual risk of infection, if one person is infectious. {'\n'}
             </Text>
             R-
-            <Text style={{color: 'black'}}>
-              probability that at least one susceptible person gets infected
+            <Text style={{color: 'black', fontSize: 17, fontWeight: 'normal'}}>
+              Probability that at least one susceptible person gets infected.
             </Text>{' '}
           </Text>
         </Collapsible>
@@ -166,7 +166,9 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     borderRadius: 15,
-    width: 360,
+    // width: 360,
+    marginLeft: 20,
+    width: 350,
     height: 500,
     marginBottom: 20,
     overflow: 'hidden',
@@ -205,6 +207,7 @@ const styles = StyleSheet.create({
   },
   RiskInfHeading: {
     marginLeft: 100,
+
     textAlign: 'center',
 
     fontSize: 18,
