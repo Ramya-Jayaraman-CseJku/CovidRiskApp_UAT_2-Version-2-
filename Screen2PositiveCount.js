@@ -428,7 +428,7 @@ export default function getPositiveCasesCountAPI({navigation, route}) {
 
             {MyChart}
           </VictoryChart>
-          {/*  <View style={{paddingTop: 40}}>
+          {/* <View style={{paddingTop: 40}}>
             <TableExample />
           </View> */}
         </ScrollView>

@@ -369,7 +369,7 @@ export default function getFullyVaccinatedCountAPI({navigation, route}) {
             </Text>
           </View>
 
-          {/*  <View style={{paddingTop: 10}}>
+          {/* <View style={{paddingTop: 10}}>
             <TableExample />
           </View> */}
         </ScrollView>

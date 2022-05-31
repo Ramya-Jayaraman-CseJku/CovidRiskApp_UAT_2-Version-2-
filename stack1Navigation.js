@@ -135,7 +135,7 @@ function DataOverviewStack() {
           name="Warning Level"
           component={getWarningLevelDataAPI}
           options={{
-            title: 'Warning',
+            title: 'Warning Level',
             headerTitleAlign: 'center',
             headerStyle: {
               backgroundColor: '#d78700',
@@ -153,7 +153,7 @@ function DataOverviewStack() {
           name="Modal Parameters"
           component={ModelParamSelection}
           options={{
-            title: 'Model',
+            title: 'Risk Infection & Simulation',
             headerTitleAlign: 'center',
             headerStyle: {
               backgroundColor: '#9239FE',

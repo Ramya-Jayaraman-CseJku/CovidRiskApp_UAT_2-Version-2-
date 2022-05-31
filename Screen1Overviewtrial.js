@@ -142,7 +142,7 @@ export default function DataOverview({navigation}) {
           }}>
           <Card containerStyle={styles.cardStyle}>
             <View style={styles.row}>
-              {/*  <View style={styles.ImageView}>
+              {/* <View style={styles.ImageView}>
                 <Image
                   source={require('./images/sick-boy-covid-infected.png')}
                   style={styles.imgDimensions}
@@ -214,7 +214,7 @@ export default function DataOverview({navigation}) {
           }}>
           <Card containerStyle={styles.cardStyle}>
             <View style={styles.row}>
-              {/* <View style={styles.ImageView}>
+              {/*  <View style={styles.ImageView}>
                 <Image
                   source={require('./images/REff_prediction.png')}
                   style={styles.imgDimensions}
@@ -290,7 +290,7 @@ export default function DataOverview({navigation}) {
               </View> */}
               <Card.Title style={styles.cardTitle}>
                 {' '}
-                Indoor Risk Infection and Simulation
+                Risk Infection and Simulation
               </Card.Title>
             </View>
 
